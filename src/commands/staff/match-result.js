@@ -1,3 +1,4 @@
+
 "use strict";
 
 /**
@@ -41,6 +42,12 @@ module.exports = {
     )
     .addStringOption((option) =>
       option
+        .setName("proof")
+        .setDescription("Screenshot/proof link(s), space-separated - required")
+        .setRequired(true)
+    )
+    .addStringOption((option) =>
+      option
         .setName("winner_choice")
         .setDescription("Throne choice of the winner (not for no-shows)")
         .addChoices(
@@ -58,12 +65,6 @@ module.exports = {
           { name: "Take the won throne (old one opens to collection)", value: "won" },
           { name: "Keep the throne I hold (won one opens to collection)", value: "current" }
         )
-    )
-    .addStringOption((option) =>
-      option
-        .setName("proof")
-        .setDescription("Screenshot/proof link(s), space-separated - required")
-        .setRequired(true)
     )
     .addStringOption((option) =>
       option.setName("proof2").setDescription("Extra proof link(s), space-separated")
@@ -115,6 +116,7 @@ module.exports = {
     const winnerLine = result.winnerId
       ? `Winner: <@${result.winnerId}> - ${outcomeLabel(result.match)}`
       : `${outcomeLabel(result.match)} - no winner recorded`;
+
     await interaction.reply({
       embeds: [
         successEmbed(
