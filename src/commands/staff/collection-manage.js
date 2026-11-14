@@ -1,3 +1,4 @@
+
 "use strict";
 
 /**
@@ -21,7 +22,7 @@ const {
   closeCollection,
   errorMessage,
 } = require("../../systems/collection");
-const { errorEmbed, successEmbed, infoEmbed } = require("../../utils/embeds");
+const { errorEmbed, successEmbed } = require("../../utils/embeds");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -43,16 +44,16 @@ module.exports = {
           { name: "Close with no winner (reopens next Arena Day)", value: "close" }
         )
     )
-    .addUserOption((option) =>
-      option
-        .setName("member")
-        .setDescription("Recipient of the seat (required for award)")
-    )
     .addStringOption((option) =>
       option
         .setName("reason")
         .setDescription("Reason recorded in the audit log")
         .setRequired(true)
+    )
+    .addUserOption((option) =>
+      option
+        .setName("member")
+        .setDescription("Recipient of the seat (required for award)")
     ),
 
   permission: PERMISSIONS.COLLECTION_MANAGE,
